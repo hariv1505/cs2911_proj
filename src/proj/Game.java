@@ -229,7 +229,7 @@ public class Game {
 		  return bool; 
 		}
 		 
-		 private void putIntoBoard() {
+		 public void putIntoBoard() {
 			thisGame = null;
 			
 			
@@ -283,24 +283,24 @@ public class Game {
 			}
 		} 
 		 
-		private void startTimer() {
+		public void startTimer() {
 			startTime = Calendar.getInstance();
 		}
 		
-		private void endTimer() {
+		public void endTimer() {
 			endTime = Calendar.getInstance(); 
 		}
 		
-		private int timeTaken() {
+		public int timeTaken() {
 			assert (endTime.after(startTime));
 			return endTime.compareTo(startTime);
 		}
 		
-		private void getExplanation(Clue c) {
+		public void getExplanation(Clue c) {
 			
 		}
 		
-		private String getDifficulty() {
+		public String getDifficulty() {
 			if (difficulty == 1) {
 				return "Easy";
 			}
@@ -316,7 +316,7 @@ public class Game {
 			else return null;
 		}
 		
-		private void setDifficulty(int difficulty) {
+		public void setDifficulty(int difficulty) {
 			assert (difficulty > 0 && difficulty < 4);
 			this.difficulty = difficulty;
 		}

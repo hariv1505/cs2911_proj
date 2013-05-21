@@ -15,10 +15,6 @@ public class Portion {
 	      NumberAdded =  new ArrayList<Integer>();
 	   }
 	 
-	 
-	 
-	 
-
 	 public boolean hasDiffRows(){
 		 boolean bool = true; 
 		 for (int i = 0; i <= 2; i++) { 
@@ -36,10 +32,6 @@ public class Portion {
 		 
 		 return bool;  
 	 }
-	
-	 
-	 
-	 
 	 
 	 public boolean hasDiffcols(){
 		 boolean bool = true; 
@@ -58,9 +50,6 @@ public class Portion {
 		 return bool;  
 	 }
 	 
-	 
-	 
-	 
 	 public boolean checkDiffNums(){
 		boolean bool = false; 
 
@@ -69,19 +58,10 @@ public class Portion {
 		return bool;  
 	 }
 	
-	 
-	 
-	 
-	 
-	 
 	 public Integer getNum(int row,int col){
 			 	 
 		return block[row][col];  
 	 }
-	 
-	 
-	 
-	 
 	 
 	 public void setNum(int row,int col,Integer num){
 		 NumberAdded.remove(block[row][col]);
@@ -89,13 +69,14 @@ public class Portion {
 		 NumberAdded.add(num);
 	 }
 	 
-	 
-	 public boolean Isexist(Integer num){
+	 public boolean exists(Integer num){
 		boolean bool;
 		bool=NumberAdded.contains(num);
 		 
 		return bool;
 	 }
-	 
-	 
+
+	public Integer[][] getPortion() {
+		return block;
+	}
 }
