@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Portion {
     
 	private  Integer[][] block;
+	//need to fix this
 	private  ArrayList<Integer> NumberAdded;
 	
 	 public Portion()
@@ -22,10 +23,18 @@ public class Portion {
 		 boolean bool = true; 
 		 for (int i = 0; i <= 2; i++) { 
 
-				if(block[i][0]==block[i][1] || block[i][0]==block[i][2] || block[i][1]==block[i][2])bool=false;
+				boolean prop1 = (block[i][0].equals(block[i][1]));
+				boolean prop2 = (block[i][0].equals(block[i][2]));
+				boolean prop3 = (block[i][1].equals(block[i][2]));
+				
+				if (prop1 || prop2 || prop3) {
+					bool=false;
+					break;
+				}
 			 
 		 } 
-	  return bool;  
+		 
+		 return bool;  
 	 }
 	
 	 
@@ -36,23 +45,28 @@ public class Portion {
 		 boolean bool = true; 
 		 for (int i = 0; i <= 2; i++) { 
 
-				if(block[0][i]==block[1][i] || block[0][i]==block[2][i] || block[1][i]==block[2][i])bool=false;
-			 
+			boolean prop1 = (block[0][i].equals(block[1][i]));
+			boolean prop2 = (block[0][i].equals(block[2][i]));
+			boolean prop3 = (block[1][i].equals(block[2][i]));
+			
+			if (prop1 || prop2 || prop3) {
+				bool=false;
+				break;
+			}
 		 } 
-	  return bool;  
+		 
+		 return bool;  
 	 }
 	 
 	 
 	 
 	 
 	 public boolean checkDiffNums(){
-		 boolean bool = false; 
-		
+		boolean bool = false; 
 
-				if(hasDiffRows() && hasDiffcols() )bool=true;
+		if(hasDiffRows() && hasDiffcols()) bool=true;
 			 
-		 
-	  return bool;  
+		return bool;  
 	 }
 	
 	 
@@ -62,25 +76,25 @@ public class Portion {
 	 
 	 public Integer getNum(int row,int col){
 			 	 
-	  return block[row][col];  
+		return block[row][col];  
 	 }
 	 
 	 
 	 
 	 
 	 
-	 public void setNum(int row,int col,Integer Num){
-		 block[row][col]=Num;
-		 NumberAdded.add(Num);
-		 
+	 public void setNum(int row,int col,Integer num){
+		 NumberAdded.remove(block[row][col]);
+		 block[row][col] = num;
+		 NumberAdded.add(num);
 	 }
 	 
 	 
-	 public boolean Isexist(Integer Num){
+	 public boolean Isexist(Integer num){
 		boolean bool;
-		 bool=NumberAdded.contains(Num);
+		bool=NumberAdded.contains(num);
 		 
-		 return bool;
+		return bool;
 	 }
 	 
 	 
