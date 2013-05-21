@@ -12,7 +12,7 @@ public class Clue {
 		this.setPortion(portion);
 		this.setIndex(index);
 		this.setNum(num);
-		this.explanation = explanation;
+		this.setExplanation(explanation);
 	}
 	
 	public String getExplanation() {
@@ -41,5 +41,9 @@ public class Clue {
 
 	public void setNum(int num) {
 		this.num = num;
+	}
+
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
 	}
 }
