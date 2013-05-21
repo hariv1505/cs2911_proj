@@ -1,5 +1,6 @@
 package proj;
 
+
 public class Clue {
 	
 	private int portion;

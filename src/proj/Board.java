@@ -1,9 +1,11 @@
 package proj;
+
+
 import java.util.*;
 
 public class Board {
 	public Board() {
-		board = new Square[NUM_ROWS][NUM_COLS];
+		board = new Portion[NUM_ROWS][NUM_COLS];
 	}
 	
 	public ArrayList<Integer> getRow(int i) {
@@ -35,6 +37,7 @@ public class Board {
 		
 		return ans;
 	}
+	
 	
 	public boolean isComplete() {
 		boolean diffCols = true;
@@ -118,8 +121,12 @@ public class Board {
 		
 		return ans;
 	}
+	public Portion[][] getBoard() {
+		return  board;
+	}
 	
-	private Square[][] board;
+	private Portion[][] board;
 	private int NUM_ROWS = 3;
 	private int NUM_COLS = 3;
+
 }
