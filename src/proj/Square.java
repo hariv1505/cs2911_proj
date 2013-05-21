@@ -1,10 +1,7 @@
 package proj;
 
-public class Square {
+public interface Square {
 
-	public Integer[][] getPortion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public Integer[][] getPortion();
 
 }
