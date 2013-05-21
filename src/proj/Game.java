@@ -1,14 +1,27 @@
 package proj;
 
+import java.util.Calendar;
+
 public class Game { 
 	 private static int[][] AB = new int[9][9];
 	 
 	 static int c = 0;// counter
 	 static int d = 0;// counter
-	 static int J = 0; 
+	 static int J = 0;
 	 
-	 public static void main(String args[]) { 
-	  Game 	soduku = new Game();  
+	 private Board thisGame;
+	 
+	 private Calendar startTime;
+	 private Calendar endTime;
+	 
+	 private int difficulty;
+	 
+	 public Game() {
+		 this.generate();
+		 this.startTimer();
+	 }
+	 
+	public void generate() {
 	  while (c == 0) { 
 		  int b1 = 0; 
 		  int b2 = 0; 
@@ -23,12 +36,12 @@ public class Game {
 		    if (AB[A][B] == 0) { 
 			    d++; 
 	    // pass random number
-			    soduku.pass(A, B); 
+			    this.pass(A, B); 
 	    // check
 			
-			    b1 = soduku.row(A, B, 0); 
-			    b2 = soduku.line(A, B, 0); 
-			    b3 = soduku.block(A, B, 0);    
+			    b1 = this.row(A, B, 0); 
+			    b2 = this.line(A, B, 0); 
+			    b3 = this.block(A, B, 0);    
 			    if (b1 == 1 || b2 == 2 || b3 == 3)AB[A][B] = 0; 
 	    // counter c=1�� 
   			    c = 1; 
@@ -56,7 +69,7 @@ public class Game {
 	 
 	
 	  // print soduku 
-	  System.out.println(" soduku ��  "); 
+	  System.out.println(" soduku "); 
 	  for (int i = 0; i <= 8; i++) { 
 		  for (int j = 0; j <= 8; j++) { 
 			  System.out.print(AB[i][j]); 
@@ -213,6 +226,45 @@ public class Game {
 		  } 
 	  } 
 	  return bool; 
-	  }
+	}
+	 
+	private void startTimer() {
+		startTime = Calendar.getInstance();
+	}
+	
+	private void endTimer() {
+		endTime = Calendar.getInstance(); 
+	}
+	
+	private int timeTaken() {
+		assert (endTime.after(startTime));
+		return endTime.compareTo(startTime);
+	}
+	
+	private void getExplanation(Clue c) {
+		
+	}
+	
+	private String getDifficulty() {
+		if (difficulty == 1) {
+			return "Easy";
+		}
+		
+		else if (difficulty == 2) {
+			return "Medium";
+		}
+		
+		else if (difficulty == 3) {
+			return "Hard";
+		}
+		
+		else return null;
+	}
+	
+	private void setDifficulty(int difficulty) {
+		assert (difficulty > 0 && difficulty < 4);
+		this.difficulty = difficulty;
+	}
 	  
+	 
 } 
