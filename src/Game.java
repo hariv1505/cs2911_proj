@@ -21,14 +21,16 @@ public class Game {
 	 public Game() {
 	
 		 this.startTimer();
+		 
 	 }
 	 public static void main(String[] args) {
 		Game a=new Game();
 		a.generate();
-		boolean finish= true;
+		boolean finished = false;
 		Scanner console = new Scanner(System.in);
 		int count=18;
-	   while(finish) {
+		
+		while(!finished) {
 		       
 	        System.out.println("Enter a cell and a number");
             int row=console.nextInt();               
@@ -36,31 +38,32 @@ public class Game {
             int value=console.nextInt();
             if(copy[row-1][col-1]==0){
               
-        	  if (value==AB[row-1][col-1]) {
-            	count--;
-            	copy[row-1][col-1]=AB[row-1][col-1];
-            	print();
-            	System.out.println("right input!!!");
-              }
+            	if (value==AB[row-1][col-1]) {
+            		count--;
+            		copy[row-1][col-1]=AB[row-1][col-1];
+            		print();
+            		System.out.println("right input!!!");
+            	}
               
-              else {
-            	  System.out.println("wrong number");
-              }
+            	else {
+            		System.out.println("wrong number");
+            	}
             }
             
             else {
             	System.out.println("cant input in this cell");
             }
-        	if(count==0){
-        		finish=false;
+            
+        	if(count == 0) {
+        		finished = true;
         		System.out.println("All done,well done!!!");
         	}
 	    }
 		
 	 }
 	 
-	 public static void print() {
-		 for (int i = 0; i <= 8; i++) { 
+	public static void print() {
+		for (int i = 0; i <= 8; i++) { 
 			for (int j = 0; j <= 8; j++) { 
 				if(copy[i][j]!=0){
 					System.out.print(copy[i][j]); 
@@ -72,8 +75,8 @@ public class Game {
 				}
 			} 
 			System.out.println(); 
-		 } 
-	 }
+		} 
+	}
 	
 	public void generate() {
 	  while (c == 0) { 
@@ -82,54 +85,51 @@ public class Game {
 		  int b3 = 0; 
 		  for (int x = 0; x <= 8; x++){ 
 			  for (int y = 0; y <= 8; y++){
-	
-		    java.util.Random ran = new java.util.Random(); 
-		    int A = x; 
-		    int B = y; 
-	   // if exist
-		    if (AB[A][B] == 0) { 
-			    d++; 
-	    // pass random number
-			    this.pass(A, B); 
-	    // check
+				  java.util.Random ran = new java.util.Random(); 
+				  int A = x; 
+				  int B = y; 
+				  // if exist
+				  if (AB[A][B] == 0) { 
+					d++; 
+					// pass random number
+					this.pass(A, B); 
+					// check
 			
-			    b1 = this.row(A, B, 0); 
-			    b2 = this.line(A, B, 0); 
-			    b3 = this.block(A, B, 0);    
-			    if (b1 == 1 || b2 == 2 || b3 == 3)AB[A][B] = 0; 
-	    // counter c=1�� 
-  			    c = 1; 
- 			    for (int i = 0; i <= 8; i++) { 
- 			 	    for (int j = 0; j <= 8; j++) { 
-					    if (AB[i][j] == 0) { 
-	       // if filled,stop
-						    c = 0; 
-					    } 
-			 	    } 
-			    } 
-		    }   // random variable
-		    if (d == 200) { 
-		 	    J++; 
-			    for (int i = 0; i < 3; i++) { 
-				    int A1 = ran.nextInt(9); 
-				    int B1 = ran.nextInt(9); 
-				    AB[A1][B1] = 0; 
-				    d = 0; 
-			    }
-		    }  
-		  } 
+				    b1 = this.row(A, B, 0); 
+				    b2 = this.line(A, B, 0); 
+				    b3 = this.block(A, B, 0);    
+				    if (b1 == 1 || b2 == 2 || b3 == 3)AB[A][B] = 0; 
+				    // counter c=1�� 
+	  			    c = 1; 
+	 			    for (int i = 0; i <= 8; i++) { 
+	 			 	    for (int j = 0; j <= 8; j++) { 
+						    if (AB[i][j] == 0) { 
+						    	// if filled,stop
+							    c = 0; 
+						    } 
+				 	    } 
+				    } 
+				}   // random variable
+			    
+				if (d == 200) { 
+			 	    J++; 
+				    for (int i = 0; i < 3; i++) { 
+					    int A1 = ran.nextInt(9); 
+					    int B1 = ran.nextInt(9); 
+					    AB[A1][B1] = 0; 
+					    d = 0; 
+				    }
+			    }  
+			} 
 		 }	  
 	  }  
 	 
 	 
 	  for (int i = 0; i <= 8; i++) { 
 		  for (int j = 0; j <= 8; j++) { 
-			
 			copy[i][j]=AB[i][j];
-			  
 		  } 
-
-	   } 
+	  } 
 	
 	  java.util.Random ran = new java.util.Random();
 	  int count = 18;
@@ -140,7 +140,6 @@ public class Game {
 			 copy[R][C]=0; 
 			 count--;
 		 }
-		
 	  }
 	  // print soduku 
 	  System.out.println(" soduku "); 
@@ -156,7 +155,6 @@ public class Game {
 			  } 
 		   System.out.println(); 
 		   } 
-		  
 		} 
   
 	 	public void pass(int a, int b) { 
@@ -268,7 +266,7 @@ public class Game {
 				   } 
 			   } 
 		   }   
-	   } 
+	    } 
 	  } else if (a == 6 || a == 7 || a == 8) { 
 		  if (b == 0 || b == 1 || b == 2) { 
 			  for (int i = 6; i <= 8; i++) { 
@@ -399,14 +397,5 @@ public class Game {
 		assert (difficulty > 0 && difficulty < 4);
 		this.difficulty = difficulty;
 	}
-	  
-	
-	
-	
-	
-
-	
-	
-	 
 } 
   
