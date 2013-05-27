@@ -1,4 +1,4 @@
-package proj;
+
 
 
 public class Clue {
@@ -8,15 +8,9 @@ public class Clue {
 	private int num;
 	private String explanation;
 	
-	public Clue(int portion, int index, int num, String explanation) {
-		this.setPortion(portion);
-		this.setIndex(index);
-		this.setNum(num);
-		this.setExplanation(explanation);
-	}
-	
 	public String getExplanation() {
 		return explanation;
+		
 	}
 
 	public int getPortion() {
@@ -41,9 +35,5 @@ public class Clue {
 
 	public void setNum(int num) {
 		this.num = num;
-	}
-
-	public void setExplanation(String explanation) {
-		this.explanation = explanation;
 	}
 }
