@@ -60,9 +60,8 @@ public class Game {
 								  }
 							  }
 						  }
-						// random variable
+						 // random variable
 						  if (d == 200 && !isFilled) { 
-						 	    
 							  	J++; 
 							    for (int a = 0; a < 3; a++) { 
 								    int A1 = ran.nextInt(9); 
