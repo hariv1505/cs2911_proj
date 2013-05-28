@@ -118,15 +118,15 @@ public class Board {
 		return ans;
 	}
 	
-	public Portion[][] getBoard() {
-		return board;
+	public Portion getBoard(int i, int j) {
+		return board[i][j];
 	}
 	
 	public Board clone() {
 		Board newBoard = new Board();
 		for (int i = 0; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
-				newBoard.getBoard()[i/3][j/3].setNum(i%3, j%3, board[i/3][j/3].getNum(i%3, j%3));
+				newBoard.getBoard(i/3,j/3).setNum(i%3, j%3, board[i/3][j/3].getNum(i%3, j%3));
 			}
 		}
 		return newBoard;

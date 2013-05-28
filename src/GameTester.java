@@ -4,7 +4,7 @@ public class GameTester {
 	public static void main(String[] args) {
 		Game aGame = new Game();
 		Scanner console = new Scanner(System.in);
-		int count=18*aGame.getDifficulty();
+		int count=11*aGame.getDifficulty() + 18;
 		
 		while(!(count==0)) {
 		       

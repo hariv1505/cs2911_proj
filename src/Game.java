@@ -14,13 +14,14 @@ public class Game {
 	 private Calendar endTime;
 	 
 	 private int difficulty;
-	private boolean hints;
+	 private boolean hints;
 	 
 	 public Game() {
 	
-		 this.setDifficulty(4);
+		 this.difficulty = 0;
 		 this.generate();
 		 this.startTimer();
+		 hints = false;
 		 
 	 }
 	 
@@ -35,23 +36,23 @@ public class Game {
 				  for (int j = 0; j < 3; j++) { //per portion col
 					  for (int col = 0; col < 3; col++) { //per int col
 						  java.util.Random ran = new java.util.Random();
-						  if (completeBoard.getBoard()[i][j].getNum(row, col) == 0) {
+						  if (completeBoard.getBoard(i,j).getNum(row, col) == 0) {
 							  d++;
 							  int number = this.pass();
-							  completeBoard.getBoard()[i][j].setNum(row, col, number);
+							  completeBoard.getBoard(i,j).setNum(row, col, number);
 							  boolean hasDiffRows = completeBoard.hasDiffRow(i*3 + row);
 							  boolean hasDiffCols = completeBoard.hasDiffCol(j*3 + col);
-							  boolean completePortion = completeBoard.getBoard()[i][j].checkDiffNums();
+							  boolean completePortion = completeBoard.getBoard(i,j).checkDiffNums();
 							  
 							  if (!hasDiffRows || !hasDiffCols || !completePortion) {
-									 completeBoard.getBoard()[i][j].setNum(row, col, 0);
+									 completeBoard.getBoard(i,j).setNum(row, col, 0);
 							  }
 							  
 							  else {
 								  isFilled = true;
 								  for (int ci = 0; ci < 3; ci++) {
 									  for (int cj = 0; cj < 3; cj++) {
-										  if (completeBoard.getBoard()[ci][cj].Isexist(0)) {
+										  if (completeBoard.getBoard(ci,cj).Isexist(0)) {
 											  isFilled = false;
 											  break;
 										  }
@@ -66,7 +67,7 @@ public class Game {
 							    for (int a = 0; a < 3; a++) { 
 								    int A1 = ran.nextInt(9); 
 								    int B1 = ran.nextInt(9);
-								    completeBoard.getBoard()[A1/3][B1/3].setNum(A1%3, B1%3, 0);
+								    completeBoard.getBoard(A1/3,B1/3).setNum(A1%3, B1%3, 0);
 							    }
 							    d = 0;
 					      }
@@ -78,13 +79,13 @@ public class Game {
 	 
 	  copiedBoard = completeBoard.clone(); 
 	  java.util.Random ran = new java.util.Random();
-	  int count = 18*this.difficulty;
+	  int count = 11*this.difficulty + 18;
 	  while (count != 0){
 		 int R = ran.nextInt(9); 
 		 int C = ran.nextInt(9);
-		 if(copiedBoard.getBoard()[R/3][C/3].getNum(R%3, C%3) !=0){
+		 if(copiedBoard.getBoard(R/3,C/3).getNum(R%3, C%3) !=0){
 			 
-			 copiedBoard.getBoard()[R/3][C/3].setNum(R%3, C%3, 0);
+			 copiedBoard.getBoard(R/3,C/3).setNum(R%3, C%3, 0);
 			 count--;
 		 }
 	  }
@@ -96,8 +97,8 @@ public class Game {
  		System.out.println(" soduku "); 
  		for (int i = 0; i < 9; i++) { 
  			for (int j = 0; j < 9; j++) { 
- 				if(theBoard.getBoard()[i/3][j/3].getNum(i%3, j%3) !=0) {
- 					System.out.print(theBoard.getBoard()[i/3][j/3].getNum(i%3, j%3)); 
+ 				if(theBoard.getBoard(i/3,j/3).getNum(i%3, j%3) !=0) {
+ 					System.out.print(theBoard.getBoard(i/3,j/3).getNum(i%3, j%3)); 
  				}
  				  
  				else {
@@ -111,7 +112,7 @@ public class Game {
  		}
 	}
 
-	public int pass() { 
+	private int pass() { 
 		java.util.Random ran = new java.util.Random(); 
 		int t = ran.nextInt(9) + 1; 
 		return t; 
@@ -122,25 +123,27 @@ public class Game {
 		i--;
 		j--;
 		
-		if(copiedBoard.getBoard()[i/3][j/3].getNum(i%3, j%3) == 0){
-            System.out.println(val + " vs " + completeBoard.getBoard()[i/3][j/3].getNum(i%3, j%3));
-        	if (val==completeBoard.getBoard()[i/3][j/3].getNum(i%3, j%3)) {
-        		copiedBoard.getBoard()[i/3][j/3].setNum(i%3, j%3, val);
-        		System.out.println("right input!!!");
+		if(copiedBoard.getBoard(i/3,j/3).getNum(i%3, j%3) == 0){
+        	if (val==completeBoard.getBoard(i/3,j/3).getNum(i%3, j%3)) {
+        		copiedBoard.getBoard(i/3,j/3).setNum(i%3, j%3, val);
         		isPut = true;
         	}
-          
-        	else {
-        		System.out.println("wrong number");
-        		isPut = false;
-        	}
+    		printBoard(copiedBoard);
         }
         
         else {
         	System.out.println("cant input in this cell");
         	isPut = false;
+        	return isPut;
         }
-		printBoard(copiedBoard);
+		
+		if (isPut) {
+			System.out.println("right input");
+		}
+		
+		else {
+			System.out.println("wrong input");
+		}
 		
 		return isPut;
 	} 
@@ -167,7 +170,7 @@ public class Game {
 	}
 	
 	public void setDifficulty(int difficulty) {
-		assert (difficulty > 0 && difficulty < 4);
+		assert (difficulty > -1 && difficulty < 5);
 		this.difficulty = difficulty;
 	}
 	

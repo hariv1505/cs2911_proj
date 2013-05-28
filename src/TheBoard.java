@@ -20,7 +20,7 @@ public class TheBoard
             BorderLayout.NORTH);
       
       
-      Game theGame = new Game();
+      final Game theGame = new Game();
       
       JPanel gridPanel = new JPanel();
       gridPanel.setLayout(new GridLayout(9, 9));
