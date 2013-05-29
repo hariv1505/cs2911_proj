@@ -2,9 +2,9 @@ import java.util.Scanner;
 
 public class GameTester {
 	public static void main(String[] args) {
-		Game aGame = new Game();
-		Scanner console = new Scanner(System.in);
-		int count=11*aGame.getDifficulty() + 18;
+		TheBoard aGame = new TheBoard();
+		//Scanner console = new Scanner(System.in);
+		/*int count=11*aGame.getDifficulty() + 18;
 		
 		while(!(count==0)) {
 		       
@@ -20,6 +20,6 @@ public class GameTester {
         	if(count==0) {
         		System.out.println("All done,well done!!!");
         	}
-	    }
+	    }*/
 	}
 }

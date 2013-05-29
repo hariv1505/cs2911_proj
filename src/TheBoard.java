@@ -27,7 +27,14 @@ public class TheBoard
       for (int i = 0; i < 9; i++)
       {
     	  for (int j = 0; j < 9; j++) {
-    		  final String label = "" + theGame.getCurrentBoard().getBoard()[i/3][j/3].getNum(i%3, j%3) + "";
+    		  final String label;
+    		  if (theGame.getCurrentBoard().getBoard(i/3,j/3).getNum(i%3, j%3) != 0) {
+    			  label = "" + theGame.getCurrentBoard().getBoard(i/3,j/3).getNum(i%3, j%3) + "";
+    		  }
+    		  
+    		  else {
+    			  label = "";
+    		  }
     	         JButton keyButton = new JButton(label);
     	         gridPanel.add(keyButton);
     	         keyButton.addActionListener(new
