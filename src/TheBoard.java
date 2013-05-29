@@ -1,6 +1,8 @@
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
+
 import javax.swing.*;
 
 /**
@@ -20,33 +22,38 @@ public class TheBoard
             BorderLayout.NORTH);
       
       
-      final Game theGame = new Game();
+      theGame = new Game();
       
       JPanel gridPanel = new JPanel();
       gridPanel.setLayout(new GridLayout(9, 9));
-      for (int i = 0; i < 9; i++)
-      {
-    	  for (int j = 0; j < 9; j++) {
-    		  final String label;
-    		  if (theGame.getCurrentBoard().getBoard(i/3,j/3).getNum(i%3, j%3) != 0) {
-    			  label = "" + theGame.getCurrentBoard().getBoard(i/3,j/3).getNum(i%3, j%3) + "";
+      for (int i = 0; i < 3; i++) {
+    	  for (int j = 0; j < 3; j++) {
+    		  for (int k = 0; k < 3; k++) {
+    			  for (int l = 0; l < 3; l++) {
+    				  final String label;
+    				  if (theGame.getCurrentBoard().getBoard(i,k).getNum(j,l) != 0) {
+    	    			  label = "" + theGame.getCurrentBoard().getBoard(i,k).getNum(j, l) + "";
+    	    		  }
+    	    		  
+    	    		  else {
+    	    			  label = "";
+    	    		  }
+    	    		  
+    	    		  final JButton keyButton = new JButton(label);
+    	    		  if ((i + k) % 2 == 1) {
+    	    			  keyButton.setBackground(Color.YELLOW);  
+    	    		  }
+	    	          
+    	    		  else keyButton.setBackground(Color.CYAN);
+	    	          gridPanel.add(keyButton);
+	    	          newNum(keyButton);
+    			  }
     		  }
-    		  
-    		  else {
-    			  label = "";
-    		  }
-    	         JButton keyButton = new JButton(label);
-    	         gridPanel.add(keyButton);
-    	         keyButton.addActionListener(new
-    	            ActionListener()
-    	            {
-    	               public void actionPerformed(ActionEvent event)
-    	               {
-    	            	   //insert click on to change number function
-    	               }
-    	            });
     	  }
       }
+      
+      JLabel hintArea = new JLabel("Right input");
+      
 
       JButton hintButton = new JButton("Toggle Hint");
       hintButton.addActionListener(new
@@ -74,6 +81,7 @@ public class TheBoard
          {
             public void actionPerformed(ActionEvent event)
             {
+            	System.exit(0);
             }
          });
 
@@ -81,12 +89,21 @@ public class TheBoard
       buttonPanel.add(clueButton);
       buttonPanel.add(hintButton);
       buttonPanel.add(quitButton);
+      
+      JPanel consoleArea = new JPanel();
+      consoleArea.setLayout(new BorderLayout());
+      JLabel consoleTitle = new JLabel("Console");
+      newInput = new JTextArea();
+      consoleArea.add(consoleTitle, BorderLayout.NORTH);
+      consoleArea.add(newInput, BorderLayout.SOUTH);
 
       JPanel optionsPanel = new JPanel();
       optionsPanel.setLayout(new BorderLayout());
       optionsPanel.add(new JLabel("Options:"),
             BorderLayout.CENTER);
-      optionsPanel.add(buttonPanel, BorderLayout.SOUTH);
+      optionsPanel.add(hintArea, BorderLayout.NORTH);
+      optionsPanel.add(buttonPanel, BorderLayout.CENTER);
+      optionsPanel.add(consoleArea, BorderLayout.SOUTH);
 
       JFrame frame = new JFrame();
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +115,20 @@ public class TheBoard
       frame.setVisible(true);
    }
 
-   /**
+   private void newNum(final JButton keyButton) {
+	   keyButton.addActionListener(new
+	             ActionListener()
+	             {
+	                public void actionPerformed(ActionEvent event)
+	                {
+	             	   String newNum = newInput.getText();
+	                   keyButton.setText(newNum);
+	                   newInput.setText("");
+	                }
+	             });	
+}
+
+/**
       Give instructions to the mail system user.
    */
    public void speak(String output)
@@ -111,4 +141,6 @@ public class TheBoard
    }
 
    private JTextArea speakerField;
+   private final Game theGame;
+   private JTextArea newInput;
 }
